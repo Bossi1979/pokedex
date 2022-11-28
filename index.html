@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <title>Pokedex</title>
+</head>
+
+<body onload="loadPokemons()">
+    <nav>
+        <h1>Pokedex</h1>
+        <button onclick="showPokemonDetails()"> Details</button>
+    </nav>
+    
+    <div id="cardPokemonDetails" class="overlay d-none" onclick="hiddenPokemonDetails()">
+        <div id="pokemonCard" onclick="notClose(event)">
+            <div id="pokemon">
+                
+            </div>
+            <div id="pokemonInfo">
+                <div class="pokemonImg">
+                    <img src="" alt="" id="pokemonImg">
+                </div>
+                <p id="pokemonId"></p>
+                <div>
+                    <table>
+                        <tbody id="stats">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
