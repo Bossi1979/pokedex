@@ -8,47 +8,26 @@
 
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
+    
+    <script src="templates.js"></script>
     <script src="script.js"></script>
 
     <link rel="icon" type="image/x-icon" href="4.svg">
     <title>Pokedex</title>
 </head>
 
-<body onload="loadPokemons()">
-    <nav>
+<body onload="initOverview()" onscroll="scrollDetected()">
+    <header>
         <h1>Pokedex</h1>
-        <button onclick="showPokemonDetails()"> Details</button>
-    </nav>
+        <div class="searchField">
+            <form onsubmit="searchInputReadIn(); return false;">
+                <input type="text" placeholder="Pokemon suchen" id="searchInput" onkeyup="searchInputReadIn()" repuired minlength="3" autocomplete="off">
+            </form>
+        </div>
+    </header>
 
     <div id="PokemonContent">
 
-        <div class="pokemonNameCard">
-            <h2>Name</h2>
-            <div class="pokemonShortData">
-                <div class="imgContent"></div>
-
-                <div>
-                    <p>fire</p>
-                    <p>poison</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="pokemonNameCard">
-
-        </div>
-        <div class="pokemonNameCard">
-
-        </div>
-        <div class="pokemonNameCard">
-
-        </div>
-        <div class="pokemonNameCard">
-
-        </div>
-        <div class="pokemonNameCard">
-
-        </div>
     </div>
 
     <div id="cardPokemonDetails" class="overlay d-none" onclick="hiddenPokemonDetails()">
