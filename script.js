@@ -1,11 +1,10 @@
-// start function
+// start functions
 async function initOverview() {
     await loadPokemonNamesAndUrl();
     renderPokemonOverwiev(cardNoStart, cardNoStop);
 };
 
 
-// todo: try and catch einbauen !
 async function loadPokemonNamesAndUrl() {
     let amount = 10000;
     let listUrl = `https://pokeapi.co/api/v2/pokemon?limit=${amount}&offset=0`;
@@ -64,10 +63,10 @@ async function loadPokemonContentImg() {
 
 
 async function imageContentSelection() {
-    let imageBoolStatus = pushContentImgSourcesToArray();
+    imageBoolStatus = pushContentImgSourcesToArray();
     let bestChoice;
     for (let i = 0; i < imageBoolStatus.length; i++) {
-        if (imageBoolStatus[i]) {
+        if (imageUrlExist(i)) {
             bestChoice = imageBoolStatus[i];
         };
     };
@@ -195,10 +194,10 @@ async function loadPokemonImg() {
 
 
 function imageSelection() {
-    let imageBoolStatus = pushImgSourcesToArray();
+    imageBoolStatus = pushImgSourcesToArray();
     let bestChoice;
     for (let i = 0; i < imageBoolStatus.length; i++) {
-        if (imageBoolStatus[i]) {
+        if (imageUrlExist(i)) {
             bestChoice = imageBoolStatus[i];
         };
     };
@@ -206,8 +205,13 @@ function imageSelection() {
 };
 
 
+function imageUrlExist(index){
+    return imageBoolStatus[index];
+};
+
+
 function pushImgSourcesToArray() {
-    let imageBoolStatus = [];
+    imageBoolStatus = [];
     let imgchoise0 = currentPokemon['sprites']['other']['dream_world']['front_default'];
     let imgchoise1 = currentPokemon['sprites']['other']['home']['front_default'];
     let imgchoise2 = currentPokemon['sprites']['other']['home']['front_female'];
@@ -235,7 +239,7 @@ function setTypeBackground() {
         let type = pokemonTypesArray[i];
         for (let index = 0; index < backgroundColorStyleArray.length; index++) {
             let backgroundtype = backgroundColorStyleArray[index]['type'];
-            if (backgroundtype == type) {
+            if (backgroundTypeColorFound(backgroundtype, type)) {
                 document.getElementById(`type${i}`).style = backgroundColorStyleArray[index]['style'];
             };
         };
@@ -243,11 +247,16 @@ function setTypeBackground() {
 };
 
 
+function backgroundTypeColorFound(backgroundtype, type){
+    return backgroundtype == type;
+};
+
+
 function setCardBackground() {
     let type = pokemonTypesArray[0];
     for (let index = 0; index < backgroundColorStyleArray.length; index++) {
         let backgroundtype = backgroundColorStyleArray[index]['type'];
-        if (backgroundtype == type) {
+        if (backgroundTypeColorFound(backgroundtype, type)) {
             document.getElementById(`pokemon`).style = backgroundColorStyleArray[index]['style'];
         };
     };
@@ -344,10 +353,10 @@ function clearSearch() {
 
 async function getSearchArray(searchValue) {
     findingsArray = [];
-    if (searchValue.length > 2) {
+    if (searchValueValid(searchValue)) {
         for (let i = 0; i < pokemonNameUrlList['results'].length; i++) {
             let element = pokemonNameUrlList['results'][i]['name'];
-            if (element.includes(searchValue)) {
+            if (foundSearchMatch(element, searchValue)) {
                 findingsArray.push(i);
             };
         };
@@ -356,14 +365,29 @@ async function getSearchArray(searchValue) {
 };
 
 
+function searchValueValid(searchValue){
+    return searchValue.length > 2
+};
+
+
+function foundSearchMatch(element, searchValue){
+    return element.includes(searchValue);
+};
+
+
 function showSearchResults() {
     document.getElementById('pokemonContent').innerHTML = '';
     for (let i = 0; i < findingsArray.length; i++) {
         renderPokemonOverwiev(findingsArray[i], findingsArray[i])
     };
-    if (findingsArray.length == 0){
+    if (noSearchMatch()){
         showNotFound();
     };
+};
+
+
+function noSearchMatch(){
+    return findingsArray.length == 0;
 };
 
 

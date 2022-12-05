@@ -83,6 +83,7 @@ let statsStyleData = [
 
 let cardNoStart = 0;
 let cardNoStop = 99;
+let imageBoolStatus = [];
 let loadingPercent = 1;
 let loadingWindow = false;
 let addidingPokemonStatus = false;
