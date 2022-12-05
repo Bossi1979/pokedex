@@ -1,4 +1,3 @@
-//globals
 let backgroundColorStyleArray = [
     {
         'type': 'fire',
@@ -99,4 +98,3 @@ let pokemonAbilitiesNameList;
 let pokemonAbilitiesNamesText = '';
 let searchAktiv = false;
 let findingsArray = [];
-// global ends
