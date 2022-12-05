@@ -1,3 +1,16 @@
+function pokemonContentHtml(pokemonName, index){
+    return /*html*/`
+        <div class='pokemonNameCard' id='pokemonNameCard${index}' onclick='showDetails(${index})'>
+            <h2 class='upperCase'>${pokemonName}</h2>
+            <div class="pokemonShortData">
+                <div class="imgContent" id='imgContent${index}'></div>
+
+                <div id='contentTypes${index}'>
+                    
+                </div>
+            </div>
+        </div>`;
+};
 
 
 function pokemonDetailsTopContainerHtml(){
@@ -18,6 +31,12 @@ function pokemonDetailsTopContainerHtml(){
 };
 
 
+function pokemonTypesHtml(i, index){
+    return /*html*/`
+        <p id='subType${i}${index}'>${pokemonContentTypesArray[index]}</p>`;
+};
+
+
 function pokemonDetailsBottomContainerHtml(){
     let pokemonId = currentPokemon['id'];
     return /*html*/`
@@ -25,7 +44,7 @@ function pokemonDetailsBottomContainerHtml(){
         <span class='abilities'><b>Abilities:</b> ${pokemonAbilitiesNamesText}</span>
         <nav>
             <button onclick='showStats()'>Stats</button>
-            <button>Moves</button>
+            <button onclick='showMoves()'>Moves</button>
         </nav>`;
 };
 
@@ -34,12 +53,12 @@ function PokemonDetailsTopContainerTypesHtml(pokemonTypeArray){
     document.getElementById('top').innerHTML = '';
     for (let i = 0; i < pokemonTypeArray.length; i++) {
         document.getElementById('top').innerHTML += /*html*/`
-        <p class='type'>${pokemonTypeArray[i]}</p>`
+        <p class='type' id='type${i}'>${pokemonTypeArray[i]}</p>`
     };
 };
 
 
-function statsHtml(){
+async function statsHtml(){
     document.getElementById('stats').innerHTML = '';
     for (let index = 0; index < statsArray.length; index++) {
         let statName = statsArray[index]['statsName'];
@@ -50,4 +69,18 @@ function statsHtml(){
             <td><div id='percentBar${index}'>${statValue}</div><td>
         </tr>`;
     };
+};
+
+
+function movesHtml(){
+    return /*html*/`
+        <p>${moves}</p>`;
+};
+
+
+function notFoundHtml(){
+    return /*html*/`
+        <div>
+            <h3>Pokemon not Found!</h3>
+        </div>`;
 };

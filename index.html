@@ -8,26 +8,33 @@
 
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style.css">
-    
+
+    <script src="globals.js"></script>
     <script src="templates.js"></script>
+    <script src="popups.js"></script>
     <script src="script.js"></script>
 
-    <link rel="icon" type="image/x-icon" href="4.svg">
+    <link rel="icon" type="image/x-icon" href="./ball.png">
     <title>Pokedex</title>
 </head>
 
-<body onload="initOverview()" onscroll="scrollDetected()">
+<body onload="initOverview()" onscroll="scrollDetected()" id="body">
+
     <header>
+        <a href="index.html"><img src="./img/ball.png"></a>
         <h1>Pokedex</h1>
         <div class="searchField">
             <form onsubmit="searchInputReadIn(); return false;">
-                <input type="text" placeholder="Pokemon suchen" id="searchInput" onkeyup="searchInputReadIn()" repuired minlength="3" autocomplete="off">
+                <input required type="text" placeholder="Pokemon suchen" id="searchInput" repuired minlength="3" autocomplete="off">
+                <button class="searchButton">Search</button>
             </form>
         </div>
     </header>
 
-    <div id="PokemonContent">
+    <div class="pokemonContainer">
+        <div id="pokemonContent">
 
+        </div>
     </div>
 
     <div id="cardPokemonDetails" class="overlay d-none" onclick="hiddenPokemonDetails()">
@@ -51,6 +58,18 @@
         </div>
     </div>
 
+    <div class="overlay d-none" id="loadingIndication">
+        <div style="width: 50%;" class="loadingContainer">
+            <h3>await loading....</h3>
+            <div class="loadingBar">
+
+                <div class="percentBar" id="percentBar">
+                    <span id="percentValue">0%</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </body>
 
